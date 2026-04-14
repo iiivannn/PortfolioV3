@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, DM_Sans, DM_Mono } from "next/font/google";
 import "./style/global.scss";
+import Providers from "./components/Providers";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-heading",
@@ -42,8 +43,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${jetbrainsMono.variable} ${dmSans.variable} ${dmMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

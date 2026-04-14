@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Preloader from "../ui/Preloader";
+import Navbar from "../ui/Navbar";
 
 export default function Home() {
   const [preloader, setPreloader] = useState(true);
@@ -16,5 +17,10 @@ export default function Home() {
     );
   }
 
-  return <div>Home</div>;
+  return (
+    <>
+      <Navbar />
+      <main>Home</main>
+    </>
+  );
 }

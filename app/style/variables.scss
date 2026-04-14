@@ -15,6 +15,10 @@
   --color-border-primary: #312e26;
   --color-border-soft: #252319;
 
+  // NAVBAR
+  --navbar-theme-active: #f0ede4;
+  --navbar-theme-icon: #111009;
+
   // ACCENT AND LINK COLORS
   --color-accent-primary: #f0ede4;
   --color-accent-text: #111009;
@@ -65,6 +69,8 @@
     --color-accent-text: #f5f4f0;
     --color-link-primary: #0e0d0b;
     --color-link-hover: #6a6760;
+    --navbar-theme-active: #d0cec7;
+    --navbar-theme-icon: #111009;
   }
 }
 
@@ -82,6 +88,8 @@
   --color-accent-text: #f5f4f0;
   --color-link-primary: #0e0d0b;
   --color-link-hover: #6a6760;
+  --navbar-theme-active: #d0cec7;
+  --navbar-theme-icon: #111009;
 }
 
 .dark {
@@ -98,4 +106,7 @@
   --color-accent-text: #111009;
   --color-link-primary: #f0ede4;
   --color-link-hover: #9a9690;
+  --navbar-theme-active: #f0ede4;
+  --navbar-theme-icon: #111009;
+  --navbar-theme-icon: #111009;
 }

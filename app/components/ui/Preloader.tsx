@@ -14,7 +14,7 @@ export default function Preloader({
   const cardRef = useRef<HTMLDivElement>(null);
   const totalImages = 7;
   const imageAnimationDuration = 0.9;
-  const imageStagger = 0.3;
+  const imageStagger = 0.2;
 
   useGSAP(
     () => {
@@ -34,7 +34,6 @@ export default function Preloader({
             opacity: 1,
             ease: "power4.out",
             duration: 0.8,
-            delay: 0.2,
           });
 
           gsap.to(".preloader-card", {
@@ -44,7 +43,6 @@ export default function Preloader({
             height: "100dvh",
             ease: "power2.inOut",
             duration: 1.5,
-            delay: 0.2,
             onComplete: onAnimationDone,
           });
         },

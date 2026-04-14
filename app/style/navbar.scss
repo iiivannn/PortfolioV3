@@ -1,0 +1,236 @@
+@use "variables";
+@use "breakpoints" as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+
+  .navbar-logo,
+  .navbar-links,
+  .navbar-theme {
+    display: none;
+  }
+
+  @include tablet {
+    justify-content: space-between;
+    padding: 20px 16px;
+
+    .navbar-burger {
+      display: none;
+    }
+
+    .navbar-logo,
+    .navbar-links,
+    .navbar-theme {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @include laptop {
+    padding: 20px 32px;
+  }
+}
+
+%pill {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.navbar-logo {
+  padding: 8px 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  user-select: none;
+}
+
+.navbar-links {
+  padding: 6px 8px;
+  gap: 60px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  justify-content: space-between;
+  margin: 0 auto;
+
+  @include laptop {
+    width: 40%;
+  }
+}
+
+.navbar-link {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .clone {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+.navbar-theme {
+  @extend %pill;
+  position: relative;
+  width: 56px;
+  height: 28px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: background-color var(--transition-fast);
+
+  &:hover {
+    background-color: var(--bg-surface-deep);
+  }
+
+  .icon-container {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--navbar-theme-active);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(28px);
+    transition: all var(--transition-base);
+
+    .light & {
+      transform: translateX(0);
+    }
+
+    svg {
+      width: 12px;
+      height: 12px;
+      color: var(--navbar-theme-icon);
+    }
+  }
+}
+
+.navbar-burger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+
+.navbar-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 280px;
+  background-color: var(--bg-surface);
+  border-right: 1px solid var(--color-border-primary);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  transform: translateX(-100%);
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.navbar-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.navbar-drawer-name {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.navbar-drawer-close {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+.navbar-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navbar-drawer-link {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border-soft);
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+.navbar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.theme-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: clip-path;
+}
