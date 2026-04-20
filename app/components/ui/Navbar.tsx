@@ -18,6 +18,7 @@ export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
+  const isOpenRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -28,8 +29,9 @@ export default function Navbar() {
         start: "top top",
         end: "max",
         onUpdate: (self) => {
+          if (isOpenRef.current) return;
           gsap.to(navRef.current, {
-            y: self.direction === 1 ? "0%" : "-100%",
+            y: self.direction === 1 ? "-100%" : "0%",
           });
         },
       });
@@ -61,6 +63,12 @@ export default function Navbar() {
         link.addEventListener("mouseenter", () => tl.play());
         link.addEventListener("mouseleave", () => tl.reverse());
       });
+
+      gsap.fromTo(
+        navRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, ease: "power3" },
+      );
     },
     { scope: navRef },
   );
@@ -69,48 +77,69 @@ export default function Navbar() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const toggleMenu = (isOpen: boolean) => {
-    setIsOpen(isOpen);
-    gsap.to(drawerRef.current, { x: isOpen ? "0%" : "-100%" });
+  const toggleMenu = (open: boolean) => {
+    isOpenRef.current = open;
+    setIsOpen(open);
+
+    if (!open) {
+      gsap.to(navRef.current, { y: "0%" });
+    }
+
+    gsap.to(drawerRef.current, { x: open ? "0%" : "-100%" });
     gsap.to(backdropRef.current, {
-      opacity: isOpen ? 1 : 0,
-      pointerEvents: isOpen ? "auto" : "none",
+      opacity: open ? 1 : 0,
+      pointerEvents: open ? "auto" : "none",
     });
   };
 
+  const handleDrawerLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    link: string,
+  ) => {
+    e.preventDefault();
+    toggleMenu(false);
+    const target = document.getElementById(link.toLowerCase());
+    if (target) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).__lenis?.scrollTo(target);
+    }
+  };
+
   return (
-    <header ref={navRef} className="navbar">
-      <button
-        className="navbar-burger"
-        onClick={() => toggleMenu(!isOpen)}
-        aria-label="Toggle menu"
-        aria-expanded={isOpen}
-      >
-        <span className="line"></span>
-        <span className="line"></span>
-        <span className="line"></span>
-      </button>
+    <>
+      <header ref={navRef} className="navbar">
+        <button
+          className="navbar-burger"
+          onClick={() => toggleMenu(!isOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+        >
+          <span className="line"></span>
+          <span className="line"></span>
+          <span className="line"></span>
+        </button>
 
-      <div className="navbar-logo">IVAN ABILLON</div>
+        <div className="navbar-logo">IVAN ABILLON</div>
 
-      <nav className="navbar-links" aria-label="Main navigation">
-        {navLinks.map((link) => (
-          <a key={link} href={`#${link.toLowerCase()}`} className="navbar-link">
-            <span className="original">{link}</span>
-            <span className="clone">{link}</span>
-          </a>
-        ))}
-      </nav>
+        <nav className="navbar-links" aria-label="Main navigation">
+          {navLinks.map((link) => (
+            <a key={link} href={`#${link.toLowerCase()}`} className="navbar-link">
+              <span className="original">{link}</span>
+              <span className="clone">{link}</span>
+            </a>
+          ))}
+        </nav>
 
-      <button className="navbar-theme" onClick={handleThemeToggle}>
-        <div className="icon-container">
-          {theme === "light" ? <Sun /> : <Moon />}
-        </div>
-      </button>
+        <button className="navbar-theme" onClick={handleThemeToggle}>
+          <div className="icon-container">
+            {theme === "light" ? <Sun /> : <Moon />}
+          </div>
+        </button>
+      </header>
 
       <div ref={drawerRef} className="navbar-drawer" aria-hidden={!isOpen}>
         <div className="navbar-drawer-header">
-          <span className="navbar-drawer-name">IVAN ABILLON</span>
+          <div className="navbar-logo">IVAN ABILLON</div>
           <button
             className="navbar-drawer-close"
             onClick={() => toggleMenu(false)}
@@ -125,12 +154,19 @@ export default function Navbar() {
               key={link}
               href={`#${link.toLowerCase()}`}
               className="navbar-drawer-link"
-              onClick={() => toggleMenu(false)}
+              onClick={(e) => handleDrawerLinkClick(e, link)}
             >
               {link}
             </a>
           ))}
         </nav>
+        <div className="navbar-drawer-theme">
+          <button className="navbar-theme" onClick={handleThemeToggle}>
+            <div className="icon-container">
+              {theme === "light" ? <Sun /> : <Moon />}
+            </div>
+          </button>
+        </div>
       </div>
 
       <div
@@ -139,6 +175,6 @@ export default function Navbar() {
         onClick={() => toggleMenu(false)}
         aria-hidden="true"
       />
-    </header>
+    </>
   );
 }
