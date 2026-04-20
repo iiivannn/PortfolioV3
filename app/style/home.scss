@@ -1,0 +1,283 @@
+@use "./breakpoints" as *;
+
+@keyframes comet-ltr {
+  from { transform: translateX(calc(-1 * var(--comet-len, 120px))); }
+  to   { transform: translateX(calc(100vw + var(--comet-len, 120px))); }
+}
+
+@keyframes comet-rtl {
+  from { transform: translateX(calc(100vw + var(--comet-len, 120px))); }
+  to   { transform: translateX(calc(-1 * var(--comet-len, 120px))); }
+}
+
+@keyframes comet-ttb {
+  from { transform: translateY(calc(-1 * var(--comet-len, 120px))); }
+  to   { transform: translateY(calc(100svh + var(--comet-len, 120px))); }
+}
+
+@keyframes comet-btt {
+  from { transform: translateY(calc(100svh + var(--comet-len, 120px))); }
+  to   { transform: translateY(calc(-1 * var(--comet-len, 120px))); }
+}
+
+.home {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--navbar-height-mobile);
+
+  .hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100svh - var(--navbar-height-mobile));
+    padding: 0 24px;
+    position: relative;
+    isolation: isolate;
+
+    .hero-title-container {
+      margin-bottom: 12px;
+
+      .hero-title {
+        font-family: var(--font-heading);
+        font-size: var(--font-size-h1);
+        font-weight: var(--font-weight-medium);
+        text-align: center;
+        text-transform: uppercase;
+        line-height: 0.9;
+      }
+    }
+
+    .hero-job-title {
+      font-family: var(--font-subtext);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .about-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100svh;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+
+    .about-description {
+      font-size: var(--font-size-h2);
+      font-weight: var(--font-weight-bold);
+      line-height: 1.2;
+      text-indent: 0;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      background-image: radial-gradient(
+        circle 200px at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+        var(--color-text-primary) 0%,
+        color-mix(in srgb, var(--color-text-primary) 28%, transparent) 100%
+      );
+      will-change: background-image;
+
+      .light & {
+        background-image: radial-gradient(
+          circle 200px at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+          var(--color-text-primary) 0%,
+          color-mix(in srgb, var(--color-text-primary) 48%, transparent) 100%
+        );
+      }
+    }
+  }
+
+  @include tablet {
+    margin-top: var(--navbar-height);
+
+    .hero-wrapper {
+      height: calc(100svh - var(--navbar-height));
+
+      .hero-title-container {
+        margin-bottom: 18px;
+      }
+
+      .hero-job-title {
+        font-size: var(--font-size-base);
+      }
+    }
+
+    .about-wrapper {
+      width: 85%;
+
+      .about-description {
+        text-indent: 12%;
+        line-height: 1.18;
+      }
+    }
+  }
+
+  @include laptop {
+    .hero-wrapper {
+      .hero-job-title {
+        font-size: var(--font-size-md);
+      }
+    }
+
+    .about-wrapper {
+      width: 80%;
+
+      .about-description {
+        text-indent: 18%;
+        line-height: 1.15;
+      }
+    }
+  }
+
+  @include desktop {
+    .hero-wrapper {
+      .hero-title-container {
+        margin-bottom: 25px;
+      }
+
+      .hero-job-title {
+        font-size: var(--font-size-lg);
+      }
+    }
+
+    .about-wrapper {
+      width: 75%;
+
+      .about-description {
+        text-indent: 20%;
+      }
+    }
+  }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  will-change: transform, opacity;
+
+  // Offset so the arrow tip aligns with the actual mouse hotspot
+  svg {
+    display: block;
+    transform: translate(-3px, -4px);
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    display: none;
+  }
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-text-subtle) 30%, transparent) 0px,
+        color-mix(in srgb, var(--color-text-subtle) 30%, transparent) 1px,
+        transparent 1px,
+        transparent var(--grid-spacing, 50px)
+      ),
+      repeating-linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-text-subtle) 30%, transparent) 0px,
+        color-mix(in srgb, var(--color-text-subtle) 30%, transparent) 1px,
+        transparent 1px,
+        transparent var(--grid-spacing, 50px)
+      );
+  }
+
+  mask-image:
+    linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+}
+
+.grid-comet {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &--h {
+    height: 1px;
+    width: var(--comet-len, 120px);
+  }
+
+  &--v {
+    width: 1px;
+    height: var(--comet-len, 120px);
+  }
+
+  &--ltr {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      color-mix(in srgb, var(--color-text-muted) 65%, transparent) 100%
+    );
+    animation-name: comet-ltr;
+    animation-duration: var(--comet-duration, 3s);
+    animation-timing-function: linear;
+    animation-delay: var(--comet-delay, 0s);
+    animation-iteration-count: infinite;
+  }
+
+  &--rtl {
+    background: linear-gradient(
+      to left,
+      transparent 0%,
+      color-mix(in srgb, var(--color-text-muted) 65%, transparent) 100%
+    );
+    animation-name: comet-rtl;
+    animation-duration: var(--comet-duration, 3s);
+    animation-timing-function: linear;
+    animation-delay: var(--comet-delay, 0s);
+    animation-iteration-count: infinite;
+  }
+
+  &--ttb {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, var(--color-text-muted) 65%, transparent) 100%
+    );
+    animation-name: comet-ttb;
+    animation-duration: var(--comet-duration, 3s);
+    animation-timing-function: linear;
+    animation-delay: var(--comet-delay, 0s);
+    animation-iteration-count: infinite;
+  }
+
+  &--btt {
+    background: linear-gradient(
+      to top,
+      transparent 0%,
+      color-mix(in srgb, var(--color-text-muted) 65%, transparent) 100%
+    );
+    animation-name: comet-btt;
+    animation-duration: var(--comet-duration, 3s);
+    animation-timing-function: linear;
+    animation-delay: var(--comet-delay, 0s);
+    animation-iteration-count: infinite;
+  }
+}
+
