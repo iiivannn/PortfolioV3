@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTheme } from "next-themes";
 import { SplitText } from "gsap/SplitText";
+import { usePreloader } from "../Providers";
 
 import { Moon, Sun } from "lucide-react";
 
@@ -20,10 +21,13 @@ export default function Navbar() {
   const backdropRef = useRef<HTMLDivElement>(null);
   const isOpenRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const preloaderDone = usePreloader();
 
   useGSAP(
     () => {
+      if (!preloaderDone) return;
+
       ScrollTrigger.create({
         trigger: document.body,
         start: "top top",
@@ -66,15 +70,15 @@ export default function Navbar() {
 
       gsap.fromTo(
         navRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: "power3" },
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3" },
       );
     },
-    { scope: navRef },
+    { scope: navRef, dependencies: [preloaderDone] },
   );
 
   const handleThemeToggle = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "light" ? "dark" : "light");
   };
 
   const toggleMenu = (open: boolean) => {
@@ -123,7 +127,11 @@ export default function Navbar() {
 
         <nav className="navbar-links" aria-label="Main navigation">
           {navLinks.map((link) => (
-            <a key={link} href={`#${link.toLowerCase()}`} className="navbar-link">
+            <a
+              key={link}
+              href={`#${link.toLowerCase()}`}
+              className="navbar-link"
+            >
               <span className="original">{link}</span>
               <span className="clone">{link}</span>
             </a>
@@ -132,7 +140,8 @@ export default function Navbar() {
 
         <button className="navbar-theme" onClick={handleThemeToggle}>
           <div className="icon-container">
-            {theme === "light" ? <Sun /> : <Moon />}
+            <Sun />
+            <Moon />
           </div>
         </button>
       </header>
@@ -163,7 +172,8 @@ export default function Navbar() {
         <div className="navbar-drawer-theme">
           <button className="navbar-theme" onClick={handleThemeToggle}>
             <div className="icon-container">
-              {theme === "light" ? <Sun /> : <Moon />}
+              <Sun />
+              <Moon />
             </div>
           </button>
         </div>

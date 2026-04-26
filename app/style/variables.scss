@@ -4,7 +4,7 @@
   --bg-alt: #191710;
   --bg-surface: #211f17;
   --bg-surface-deep: #2a2820;
-  --bg-preloader: #fff;
+  --bg-preloader: #211f17;
 
   // TEXT COLORS
   --color-text-primary: #f0ede4;
@@ -57,10 +57,15 @@
 
   --orb-color-1: rgba(180, 115, 45, 0.12);
   --orb-color-2: rgba(155, 95, 35, 0.08);
+
+  --font-display: var(--font-display-var);
+  --color-accent-warm: #c4622d;
+  --color-accent-warm-subtle: rgba(196, 98, 45, 0.10);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
+    --bg-preloader: #e5e3dc;
     --orb-color-1: rgba(120, 75, 25, 0.06);
     --orb-color-2: rgba(100, 65, 20, 0.04);
     --bg-primary: #f5f4f0;
@@ -78,10 +83,13 @@
     --color-link-hover: #6a6760;
     --navbar-theme-active: #d0cec7;
     --navbar-theme-icon: #111009;
+    --color-accent-warm: #b5521f;
+    --color-accent-warm-subtle: rgba(181, 82, 31, 0.08);
   }
 }
 
 .light {
+  --bg-preloader: #111009;
   --orb-color-1: rgba(120, 75, 25, 0.06);
   --orb-color-2: rgba(100, 65, 20, 0.04);
   --bg-primary: #f5f4f0;
@@ -99,6 +107,8 @@
   --color-link-hover: #6a6760;
   --navbar-theme-active: #d0cec7;
   --navbar-theme-icon: #111009;
+  --color-accent-warm: #b5521f;
+  --color-accent-warm-subtle: rgba(181, 82, 31, 0.08);
 }
 
 .dark {

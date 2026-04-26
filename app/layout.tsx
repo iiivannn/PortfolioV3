@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, DM_Sans, DM_Mono } from "next/font/google";
+import { JetBrains_Mono, DM_Sans, DM_Mono, Geist_Mono } from "next/font/google";
 import "./style/global.scss";
 import Providers from "./components/Providers";
 
@@ -28,6 +28,12 @@ const dmMono = DM_Mono({
   fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
 });
 
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "800"],
+  variable: "--font-display-var",
+});
+
 export const metadata: Metadata = {
   title: "Ivan Abillon | Portfolio",
   description:
@@ -42,7 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jetbrainsMono.variable} ${dmSans.variable} ${dmMono.variable} h-full antialiased`}
+      className={`${jetbrainsMono.variable} ${dmSans.variable} ${dmMono.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body>

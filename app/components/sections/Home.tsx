@@ -1,23 +1,23 @@
 "use client";
 
-import { useState, useRef } from "react";
-import Preloader from "../ui/Preloader";
-import Navbar from "../ui/Navbar";
+import { useRef } from "react";
 import HeroGrid from "../ui/HeroGrid";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MousePointer2 } from "lucide-react";
+import { usePreloader } from "../Providers";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(SplitText);
 
 export default function Home() {
-  const [preloader, setPreloader] = useState(true);
+  const preloaderDone = usePreloader();
   const cursorRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLElement>(null);
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const isInAboutRef = useRef(false);
-  const isOverTextRef = useRef(false);
 
   useGSAP(() => {
-    if (preloader) return;
+    if (!preloaderDone) return;
 
     let hasEnteredViewport = false;
     const tl = gsap.timeline();
@@ -37,93 +37,69 @@ export default function Home() {
         gsap.set(cursorRef.current, { x: e.clientX, y: e.clientY });
         gsap.to(cursorRef.current, { opacity: 1, duration: 0.3 });
       }
-
       cursorXTo(e.clientX);
       cursorYTo(e.clientY);
-
-      if (descriptionRef.current && isInAboutRef.current) {
-        const rect = descriptionRef.current.getBoundingClientRect();
-        descriptionRef.current.style.setProperty(
-          "--mouse-x",
-          `${e.clientX - rect.left}px`,
-        );
-        descriptionRef.current.style.setProperty(
-          "--mouse-y",
-          `${e.clientY - rect.top}px`,
-        );
-      }
     };
 
-    const handleAboutEnter = () => {
-      isInAboutRef.current = true;
-    };
-
-    const handleAboutLeave = () => {
-      isInAboutRef.current = false;
-      isOverTextRef.current = false;
-      if (descriptionRef.current) {
-        descriptionRef.current.style.setProperty("--mouse-x", "-9999px");
-        descriptionRef.current.style.setProperty("--mouse-y", "-9999px");
-      }
-      gsap.to(cursorRef.current, { opacity: 1, duration: 0.3 });
-    };
-
-    const handleTextEnter = () => {
-      isOverTextRef.current = true;
-      gsap.to(cursorRef.current, { opacity: 0, duration: 0.3 });
-    };
-
-    const handleTextLeave = () => {
-      isOverTextRef.current = false;
-      gsap.to(cursorRef.current, { opacity: 1, duration: 0.3 });
-    };
-
-    aboutRef.current?.addEventListener("mouseenter", handleAboutEnter);
-    aboutRef.current?.addEventListener("mouseleave", handleAboutLeave);
-    descriptionRef.current?.addEventListener("mouseenter", handleTextEnter);
-    descriptionRef.current?.addEventListener("mouseleave", handleTextLeave);
     window.addEventListener("mousemove", handleMouseMove);
 
     tl.fromTo(
-      ".hero-title",
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, ease: "power1.out", stagger: 0.4 },
+      ".hero-subtitle",
+      { x: -20, opacity: 0 },
+      { x: 0, opacity: 1, ease: "power2.inOut", duration: 0.6 },
     );
 
     tl.fromTo(
-      ".hero-job-title",
-      { opacity: 0 },
-      { opacity: 1, ease: "power2.in", duration: 0.6 },
+      ".hero-title span",
+      { x: -20, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.inOut",
+        stagger: 0.2,
+        reversed: true,
+      },
     );
+
+    gsap.fromTo(
+      ".hero-annotation",
+      { x: -20, opacity: 0 },
+      { x: 0, delay: 1.6, opacity: 1, ease: "power2.inOut", duration: 0.6 },
+    );
+
+    gsap.fromTo(
+      ".hero-cta .btn",
+      { opacity: 0, x: 20 },
+      { opacity: 1, x: 0, ease: "power2.inOut", stagger: 0.4, duration: 1.2 },
+    );
+
+    const splitAboutDesc = SplitText.create(".about-description", {
+      type: "lines",
+      mask: "lines",
+    });
+
+    gsap.from(splitAboutDesc.lines, {
+      duration: 1,
+      yPercent: 100,
+      opacity: 0,
+      stagger: 0.3,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".about-description",
+        start: "top 80%",
+      },
+    });
+
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      aboutRef.current?.removeEventListener("mouseenter", handleAboutEnter);
-      aboutRef.current?.removeEventListener("mouseleave", handleAboutLeave);
-      descriptionRef.current?.removeEventListener(
-        "mouseenter",
-        handleTextEnter,
-      );
-      descriptionRef.current?.removeEventListener(
-        "mouseleave",
-        handleTextLeave,
-      );
+      splitAboutDesc.revert();
     };
-  }, [preloader]);
-
-  if (preloader) {
-    return (
-      <Preloader
-        onAnimationDone={() => {
-          setPreloader(false);
-        }}
-      />
-    );
-  }
+  }, [preloaderDone]);
 
   return (
     <>
-      <Navbar />
       <div className="cursor" ref={cursorRef}>
         <MousePointer2
           size={20}
@@ -132,29 +108,57 @@ export default function Home() {
           strokeWidth={1.5}
         />
       </div>
-      <main className="home">
+      <div className="home" id="home">
         <section className="hero-wrapper">
           <HeroGrid />
-          <div className="hero-title-container">
-            <p className="hero-title">Ivan</p>
-            <p className="hero-title">Abillon</p>
+          <div className="hero-content">
+            <div className="hero-annotation">
+              Web Designer &amp; Software Developer
+            </div>
+            <h1 className="hero-title">
+              <span className="hero-first">Ivan</span>
+              <span className="hero-last">Abillon</span>
+            </h1>
+            <p className="hero-subtitle">
+              Building with intention. Designing for people.
+            </p>
           </div>
-          <div className="hero-job-title">
-            Software Developer / Web Designer
+          <div className="hero-bottom">
+            <div className="hero-cta">
+              <a href="#works" className="btn btn-ghost">
+                View Works
+              </a>
+              <a href="#contact" className="btn btn-primary">
+                Let&apos;s Talk
+              </a>
+            </div>
           </div>
         </section>
 
-        <section className="about-wrapper" ref={aboutRef}>
-          <p className="about-description" ref={descriptionRef}>
-            Weaving design, experience, and accessibility — building websites
-            with intention and understanding for its users. Before becoming a
-            developer, I was a user first. I believe great websites fulfill user
-            needs. That&apos;s why I focus on creating intuitive experiences
-            through meaningful, modern interfaces, thoughtful user experience,
-            and accessibility across all devices.
-          </p>
+        <section className="about-section" id="about">
+          <div className="about-inner">
+            <div className="about-header">
+              <span className="about-index">01</span>
+              <span className="about-label">About</span>
+            </div>
+            <div className="about-body">
+              <h2 className="about-heading">
+                <span className="about-heading-bold">Designer.</span>
+                <span className="about-heading-accent">Developer.</span>
+              </h2>
+              <p className="about-description">
+                Weaving design, experience, and accessibility — building
+                websites with intention and understanding for its users. Before
+                becoming a developer, I was a user first. I believe great
+                websites fulfill user needs. That&apos;s why I focus on creating
+                intuitive experiences through meaningful, modern interfaces,
+                thoughtful user experience, and accessibility across all
+                devices.
+              </p>
+            </div>
+          </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

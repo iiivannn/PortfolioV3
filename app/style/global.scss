@@ -2,6 +2,12 @@
 @use "preloader";
 @use "navbar";
 @use "home";
+@use "works";
+@use "skills";
+@use "portfolio";
+@use "certificates";
+@use "quote";
+@use "footer";
 
 *,
 *::before,
@@ -69,4 +75,9 @@ a {
   &:hover {
     color: var(--color-link-hover);
   }
+}
+
+a,
+button {
+  cursor: none;
 }
