@@ -43,6 +43,18 @@ export default function Home() {
 
     window.addEventListener("mousemove", handleMouseMove);
 
+    gsap.fromTo(
+      ".hero-cta .btn",
+      { opacity: 0, x: 20 },
+      {
+        opacity: 1,
+        x: 0,
+        ease: "power2.out",
+        stagger: 0.4,
+        duration: 1,
+      },
+    );
+
     tl.fromTo(
       ".hero-subtitle",
       { x: -20, opacity: 0 },
@@ -68,29 +80,22 @@ export default function Home() {
       { x: 0, delay: 1.6, opacity: 1, ease: "power2.inOut", duration: 0.6 },
     );
 
-    gsap.fromTo(
-      ".hero-cta .btn",
-      { opacity: 0, x: 20 },
-      { opacity: 1, x: 0, ease: "power2.inOut", stagger: 0.4, duration: 1.2 },
-    );
-
     const splitAboutDesc = SplitText.create(".about-description", {
       type: "lines",
       mask: "lines",
     });
 
     gsap.from(splitAboutDesc.lines, {
-      duration: 1,
+      duration: 0.6,
       yPercent: 100,
       opacity: 0,
-      stagger: 0.3,
+      stagger: 0.2,
       ease: "power2.inOut",
       scrollTrigger: {
         trigger: ".about-description",
         start: "top 80%",
       },
     });
-
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
