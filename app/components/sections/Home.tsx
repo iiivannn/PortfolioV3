@@ -4,13 +4,8 @@ import { useRef } from "react";
 import HeroGrid from "../ui/HeroGrid";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MousePointer2 } from "lucide-react";
 import { usePreloader } from "../Providers";
-import { SplitText } from "gsap/SplitText";
-
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(SplitText);
 
 export default function Home() {
   const preloaderDone = usePreloader();
@@ -80,26 +75,8 @@ export default function Home() {
       { x: 0, delay: 1.6, opacity: 1, ease: "power2.inOut", duration: 0.6 },
     );
 
-    const splitAboutDesc = SplitText.create(".about-description", {
-      type: "lines",
-      mask: "lines",
-    });
-
-    gsap.from(splitAboutDesc.lines, {
-      duration: 0.6,
-      yPercent: 100,
-      opacity: 0,
-      stagger: 0.2,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".about-description",
-        start: "top 80%",
-      },
-    });
-
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      splitAboutDesc.revert();
     };
   }, [preloaderDone]);
 
@@ -113,57 +90,31 @@ export default function Home() {
           strokeWidth={1.5}
         />
       </div>
-      <div className="home" id="home">
-        <section className="hero-wrapper">
-          <HeroGrid />
-          <div className="hero-content">
-            <div className="hero-annotation">
-              Web Designer &amp; Software Developer
-            </div>
-            <h1 className="hero-title">
-              <span className="hero-first">Ivan</span>
-              <span className="hero-last">Abillon</span>
-            </h1>
-            <p className="hero-subtitle">
-              Building with intention. Designing for people.
-            </p>
+      <section className="hero-wrapper" id="home">
+        <HeroGrid />
+        <div className="hero-content">
+          <div className="hero-annotation">
+            Web Designer &amp; Software Developer
           </div>
-          <div className="hero-bottom">
-            <div className="hero-cta">
-              <a href="#works" className="btn btn-ghost">
-                View Works
-              </a>
-              <a href="#contact" className="btn btn-primary">
-                Let&apos;s Talk
-              </a>
-            </div>
+          <h1 className="hero-title">
+            <span className="hero-first">Ivan</span>
+            <span className="hero-last">Abillon</span>
+          </h1>
+          <p className="hero-subtitle">
+            Building with intention. Designing for people.
+          </p>
+        </div>
+        <div className="hero-bottom">
+          <div className="hero-cta">
+            <a href="#works" className="btn btn-ghost">
+              View Works
+            </a>
+            <a href="#contact" className="btn btn-primary">
+              Let&apos;s Talk
+            </a>
           </div>
-        </section>
-
-        <section className="about-section" id="about">
-          <div className="about-inner">
-            <div className="about-header">
-              <span className="about-index">01</span>
-              <span className="about-label">About</span>
-            </div>
-            <div className="about-body">
-              <h2 className="about-heading">
-                <span className="about-heading-bold">Designer.</span>
-                <span className="about-heading-accent">Developer.</span>
-              </h2>
-              <p className="about-description">
-                Weaving design, experience, and accessibility — building
-                websites with intention and understanding for its users. Before
-                becoming a developer, I was a user first. I believe great
-                websites fulfill user needs. That&apos;s why I focus on creating
-                intuitive experiences through meaningful, modern interfaces,
-                thoughtful user experience, and accessibility across all
-                devices.
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </>
   );
 }
