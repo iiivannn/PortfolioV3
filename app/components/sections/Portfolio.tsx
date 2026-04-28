@@ -1,41 +1,12 @@
 "use client";
 
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { usePreloader } from "../Providers";
-import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-
-type TimelineEntry = {
-  role: string;
-  org: string;
-  period: string;
-};
-
-const timeline: TimelineEntry[] = [
-  {
-    role: "Junior Frontend Developer",
-    org: "Two Miss Pink Place Inc.",
-    period: "Aug 2025 – Present",
-  },
-  {
-    role: "Business Intelligence Developer Intern",
-    org: "Analog Devices Inc.",
-    period: "Feb 2025 – May 2025",
-  },
-  {
-    role: "React.js Developer",
-    org: "Freelance",
-    period: "Sept 2023 – March 2024",
-  },
-  {
-    role: "Bachelor of Science in Computer Engineering",
-    org: "De La Salle University – Dasmariñas",
-    period: "Aug 2021 – June 2025",
-  },
-];
 
 export default function Portfolio() {
   const preloaderDone = usePreloader();
@@ -69,15 +40,37 @@ export default function Portfolio() {
       </div>
 
       <div className="portfolio-timeline">
-        {timeline.map((entry, i) => (
-          <div key={i} className="portfolio-entry">
-            <div className="portfolio-entry-info">
-              <h3 className="portfolio-entry-role">{entry.role}</h3>
-              <p className="portfolio-entry-org">{entry.org}</p>
-            </div>
-            <span className="portfolio-entry-period">{entry.period}</span>
+        <div className="portfolio-entry">
+          <div className="portfolio-entry-info">
+            <h3 className="portfolio-entry-role">Junior Frontend Developer</h3>
+            <p className="portfolio-entry-org">Two Miss Pink Place Inc.</p>
           </div>
-        ))}
+          <span className="portfolio-entry-period">Aug 2025 – Present</span>
+        </div>
+
+        <div className="portfolio-entry">
+          <div className="portfolio-entry-info">
+            <h3 className="portfolio-entry-role">Business Intelligence Developer Intern</h3>
+            <p className="portfolio-entry-org">Analog Devices Inc.</p>
+          </div>
+          <span className="portfolio-entry-period">Feb 2025 – May 2025</span>
+        </div>
+
+        <div className="portfolio-entry">
+          <div className="portfolio-entry-info">
+            <h3 className="portfolio-entry-role">React.js Developer</h3>
+            <p className="portfolio-entry-org">Freelance</p>
+          </div>
+          <span className="portfolio-entry-period">Sept 2023 – March 2024</span>
+        </div>
+
+        <div className="portfolio-entry">
+          <div className="portfolio-entry-info">
+            <h3 className="portfolio-entry-role">Bachelor of Science in Computer Engineering</h3>
+            <p className="portfolio-entry-org">De La Salle University – Dasmariñas</p>
+          </div>
+          <span className="portfolio-entry-period">Aug 2021 – June 2025</span>
+        </div>
       </div>
     </section>
   );
