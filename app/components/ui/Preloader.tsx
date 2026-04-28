@@ -41,7 +41,8 @@ export default function Preloader({
             left: 0,
             width: "100dvw",
             height: "100dvh",
-            ease: "power2.inOut",
+            delay: 0.2,
+            ease: "expo.inOut",
             duration: 1.5,
             onComplete: onAnimationDone,
           });

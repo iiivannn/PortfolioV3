@@ -51,15 +51,17 @@ export default function Navbar() {
 
         tl.to(splitOriginal.chars, {
           yPercent: -100,
-          stagger: { each: 0.03, from: "end" },
-          duration: 0.3,
+          stagger: { each: 0.02, from: "start" },
+          duration: 0.4,
+          ease: "power2.inOut",
         });
         tl.to(
           splitClone.chars,
           {
             yPercent: -100,
-            stagger: { each: 0.03, from: "end" },
-            duration: 0.3,
+            stagger: { each: 0.02, from: "start" },
+            duration: 0.4,
+            ease: "power2.inOut",
           },
           0,
         );
