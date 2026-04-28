@@ -16,7 +16,7 @@
 .certs-section-label {
   font-family: var(--font-subtext);
   font-size: var(--font-size-xs);
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   display: flex;
@@ -98,8 +98,8 @@
 
 .cert-item-label {
   font-family: var(--font-subtext);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   order: 2;
@@ -127,8 +127,8 @@
 
 .cert-item-year {
   font-family: var(--font-subtext);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
   letter-spacing: 0.1em;
   order: 3;
 

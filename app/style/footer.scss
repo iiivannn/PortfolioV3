@@ -76,9 +76,15 @@
 
 .footer-columns {
   display: flex;
-  gap: clamp(40px, 5vw, 72px);
+  flex-direction: column;
+  gap: clamp(28px, 4vh, 40px);
   flex-shrink: 0;
   align-items: flex-start;
+
+  @include tablet {
+    flex-direction: row;
+    gap: clamp(40px, 5vw, 72px);
+  }
 }
 
 .footer-col-label {
@@ -112,6 +118,8 @@
   padding: 0;
   cursor: none;
   text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
   transition: color var(--transition-fast);
 
   &:hover {
