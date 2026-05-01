@@ -210,7 +210,7 @@
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  border: 1px solid var(--color-text-muted);
+  border: 1px solid var(--color-text-subtle);
   border-radius: 2px;
   transition:
     color 0.18s ease,
@@ -399,7 +399,6 @@
     max-width: 100%;
     max-height: 85vh;
     object-fit: contain;
-    border: 1px solid var(--color-border-primary);
     border-radius: 3px;
   }
 }
@@ -415,7 +414,7 @@
   font-family: var(--font-display);
   font-size: var(--font-size-sm);
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: #f0ede4;
 }
 
 .lightbox-close {
@@ -423,7 +422,7 @@
   font-size: var(--font-size-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: rgba(240, 237, 228, 0.5);
   background: none;
   border: none;
   display: flex;
@@ -432,7 +431,7 @@
   transition: color 0.2s;
 
   &:hover {
-    color: var(--color-text-primary);
+    color: #f0ede4;
   }
 }
 

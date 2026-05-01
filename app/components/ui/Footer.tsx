@@ -117,7 +117,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <span className="footer-locale">
-          <span>Manila, PH</span>
+          <span>Cavite, PH</span>
           <span>UTC+8</span>
         </span>
         <span className="footer-credits">
