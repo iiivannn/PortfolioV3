@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const PULSE_COUNT = 3; // comets active simultaneously
-const GRID_SPACING = 50; // px between grid lines — drives both JS and CSS
+const GRID_SPACING = 50; // px between grid lines
 const COMET_LEN = 120; // px length of each comet trail
 
 type Direction = "ltr" | "rtl" | "ttb" | "btt";

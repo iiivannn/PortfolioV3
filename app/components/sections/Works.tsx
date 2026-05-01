@@ -65,8 +65,6 @@ export default function Works() {
           cards[i - 1],
           {
             scale: 0.85,
-            filter: "blur(8px)",
-            opacity: 0.5,
             ease: "none",
             duration: TRANSITION,
           },
@@ -116,9 +114,11 @@ export default function Works() {
             <span className="work-category">Task Manager</span>
             <h3 className="work-title">Project Board</h3>
             <p className="work-desc">
-              A full-stack project management application with real-time board
-              updates, drag-and-drop task ordering, team collaboration, and
-              role-based access control.
+              Project Board is a full-stack Kanban-style task manager where you
+              track projects across four status stages: To Do, In Progress,
+              Complete, and Obsolete. It features drag-and-drop reordering,
+              activity logs per project, optional completion rewards, and a
+              persistent light/dark theme.
             </p>
             <div className="work-tags">
               <span className="work-tag">Next.js</span>
@@ -201,9 +201,11 @@ export default function Works() {
             <span className="work-category">Notepad Application</span>
             <h3 className="work-title">NoteFixr</h3>
             <p className="work-desc">
-              An AI-assisted note-taking app with rich text editing, grammar
-              correction via Groq, and persistent cloud storage. Built for speed
-              and clarity.
+              NoteFixr is a full-stack note-taking app that transforms
+              disorganized notes into structured, actionable content. It
+              features a sidebar-based workspace with AI-powered tools and a
+              built-in chat prompt. Authentication is handled via NextAuth and
+              Google OAuth, ensuring a seamless and secure sign-in experience.
             </p>
             <div className="work-tags">
               <span className="work-tag">Next.js</span>
@@ -287,9 +289,11 @@ export default function Works() {
             <span className="work-category">Coffee Shop Website</span>
             <h3 className="work-title">Cozy Grounds</h3>
             <p className="work-desc">
-              A warmly designed coffee shop website with full semantic markup,
-              accessible navigation, and a mobile-first responsive layout that
-              feels as cozy as the brand.
+              Cozy Grounds is a coffee shop landing page with interactive
+              product filtering, a blog section, a premium showcase, and smooth
+              scroll animations. Built with semantic HTML, CSS, and vanilla
+              JavaScript, it uses a mobile-first approach and is designed to be
+              accessible and user-friendly across all devices.
             </p>
             <div className="work-tags">
               <span className="work-tag">HTML5</span>
@@ -352,9 +356,11 @@ export default function Works() {
             <span className="work-category">Electric Vehicle Dealership</span>
             <h3 className="work-title">NexDrive</h3>
             <p className="work-desc">
-              A high-impact EV dealership landing page with scroll-reveal
-              animations, a custom vehicle carousel, and an accessible semantic
-              structure built for conversion.
+              NexDrive is a luxury electric vehicle dealership website built to
+              showcase and browse high-performance EVs. It features an
+              interactive vehicle catalog with brand filtering, a touch-enabled
+              carousel, detailed specs per model, a newsletter subscription
+              section, and scroll-triggered animations.
             </p>
             <div className="work-tags">
               <span className="work-tag">HTML5</span>

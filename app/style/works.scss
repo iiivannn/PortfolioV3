@@ -60,6 +60,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  will-change: transform;
 
   &:nth-child(1) {
     z-index: 1;
@@ -436,20 +437,14 @@
 }
 
 .works-scroll-hint {
-  position: absolute;
-  bottom: 40px;
-  right: clamp(24px, 5vw, 80px);
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: end;
   gap: 20px;
   pointer-events: none;
   z-index: 10;
-
-  // @include laptop {
-  //   flex-direction: column;
-  //   gap: 10px;
-  // }
+  margin-top: 20px;
 }
 
 .works-scroll-hint-label {
@@ -458,10 +453,6 @@
   color: var(--color-text-subtle);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-
-  // @include laptop {
-  //   writing-mode: vertical-rl;
-  // }
 }
 
 .works-scroll-hint-line {

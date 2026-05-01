@@ -59,6 +59,30 @@
     justify-content: space-between;
     align-items: center;
     gap: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0 -16px;
+    transition: background-color 0.25s ease;
+
+    .portfolio-entry-info {
+      transition: transform 0.25s ease;
+    }
+
+    .portfolio-entry-period {
+      transition: color 0.25s ease;
+    }
+
+    &:hover {
+      background-color: var(--bg-surface);
+
+      .portfolio-entry-info {
+        transform: translateX(6px);
+      }
+
+      .portfolio-entry-period {
+        color: var(--color-text-primary);
+      }
+    }
   }
 }
 
@@ -90,4 +114,3 @@
   white-space: nowrap;
   flex-shrink: 0;
 }
-

@@ -26,8 +26,8 @@ export default function About() {
         duration: 0.6,
         yPercent: 100,
         opacity: 0,
-        stagger: 0.2,
-        ease: "power2.inOut",
+        stagger: 0.15,
+        ease: "power1.inOut",
         scrollTrigger: {
           trigger: ".about-description",
           start: "top 80%",

@@ -45,7 +45,6 @@ export default function Home() {
         opacity: 1,
         x: 0,
         ease: "power2.out",
-        stagger: 0.4,
         duration: 1,
       },
     );
@@ -57,15 +56,13 @@ export default function Home() {
     );
 
     tl.fromTo(
-      ".hero-title span",
+      ".hero-title",
       { x: -20, opacity: 0 },
       {
         x: 0,
         opacity: 1,
         duration: 1,
         ease: "power2.inOut",
-        stagger: 0.2,
-        reversed: true,
       },
     );
 

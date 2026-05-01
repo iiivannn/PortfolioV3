@@ -2,7 +2,8 @@
 @use "breakpoints" as bp;
 
 .certs-section {
-  padding: clamp(70px, 22vh, 180px) clamp(24px, 5vw, 80px) clamp(120px, 30vh, 260px);
+  padding: clamp(70px, 22vh, 180px) clamp(24px, 5vw, 80px)
+    clamp(120px, 30vh, 260px);
   min-height: 100svh;
 }
 
@@ -42,7 +43,6 @@
   border-top: 1px solid var(--color-border-primary);
 }
 
-// Column header row — hidden on mobile
 .certs-col-header {
   display: none;
 
@@ -71,7 +71,6 @@
   }
 }
 
-// Cert item row
 .cert-item {
   display: flex;
   flex-direction: column;
@@ -138,7 +137,6 @@
   }
 }
 
-// Cursor-tracked certificate image preview — pointer devices only
 .cert-cursor-preview {
   position: fixed;
   top: 0;

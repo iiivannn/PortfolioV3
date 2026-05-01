@@ -8,8 +8,6 @@
   overflow: hidden;
 }
 
-// ─── Upper: tagline + monogram ────────────────────────────────────────────────
-
 .footer-upper {
   display: flex;
   justify-content: space-between;
@@ -41,8 +39,6 @@
   flex-shrink: 0;
 }
 
-// ─── Lower: headline + columns ────────────────────────────────────────────────
-
 .footer-lower {
   display: flex;
   flex-direction: column;
@@ -71,8 +67,6 @@
 .footer-headline-period {
   color: var(--color-text-muted);
 }
-
-// ─── Columns ──────────────────────────────────────────────────────────────────
 
 .footer-columns {
   display: flex;
@@ -127,8 +121,6 @@
   }
 }
 
-// ─── Bottom Strip ─────────────────────────────────────────────────────────────
-
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -144,7 +136,7 @@
   align-items: center;
   font-family: var(--font-subtext);
   font-size: var(--font-size-base);
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
   letter-spacing: 0.06em;
 
   span + span {
@@ -152,7 +144,7 @@
     position: relative;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 8px;
       top: 50%;
