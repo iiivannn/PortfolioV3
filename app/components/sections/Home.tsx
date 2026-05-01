@@ -38,38 +38,31 @@ export default function Home() {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    gsap.fromTo(
-      ".hero-cta .btn",
-      { opacity: 0, x: 20 },
-      {
-        opacity: 1,
-        x: 0,
-        ease: "power2.out",
-        duration: 1,
-      },
-    );
-
     tl.fromTo(
-      ".hero-subtitle",
+      ".hero-annotation",
       { x: -20, opacity: 0 },
       { x: 0, opacity: 1, ease: "power2.inOut", duration: 0.6 },
     );
 
     tl.fromTo(
-      ".hero-title",
+      ".hero-title span",
       { x: -20, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power2.inOut",
-      },
+      { x: 0, opacity: 1, stagger: 0.2, ease: "power3.inOut", duration: 1 },
+      "<0.25",
     );
 
-    gsap.fromTo(
-      ".hero-annotation",
+    tl.fromTo(
+      ".hero-subtitle",
       { x: -20, opacity: 0 },
-      { x: 0, delay: 1.6, opacity: 1, ease: "power2.inOut", duration: 0.6 },
+      { x: 0, opacity: 1, ease: "power2.inOut", duration: 1 },
+      "<0.35",
+    );
+
+    tl.fromTo(
+      ".hero-cta .btn",
+      { opacity: 0, x: 20 },
+      { opacity: 1, x: 0, ease: "power2.inOut", duration: 1 },
+      "<0.35",
     );
 
     return () => {
