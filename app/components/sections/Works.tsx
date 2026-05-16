@@ -130,7 +130,7 @@ export default function Works() {
             </div>
             <div className="work-links">
               <a
-                href="https://project-board-eosin.vercel.app/"
+                href="https://the-project-board.vercel.app/"
                 className="work-link"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -305,7 +305,7 @@ export default function Works() {
             </div>
             <div className="work-links">
               <a
-                href="https://coffee-website-seven-indol.vercel.app/"
+                href="https://cozy-grounds.vercel.app/"
                 className="work-link"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -374,7 +374,7 @@ export default function Works() {
             </div>
             <div className="work-links">
               <a
-                href="https://car-website-wheat.vercel.app/"
+                href="https://nexdrive-ev.vercel.app/"
                 className="work-link"
                 target="_blank"
                 rel="noopener noreferrer"

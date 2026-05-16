@@ -16,13 +16,13 @@ const navLinks = [
 ];
 
 const projectLinks = [
-  { label: "Project Board", href: "https://project-board-eosin.vercel.app/" },
+  { label: "Project Board", href: "https://the-project-board.vercel.app/" },
   { label: "NoteFixr", href: "https://note-fixr.vercel.app/" },
   {
     label: "Cozy Grounds",
-    href: "https://coffee-website-seven-indol.vercel.app/",
+    href: "https://cozy-grounds.vercel.app/",
   },
-  { label: "NexDrive", href: "https://car-website-wheat.vercel.app/" },
+  { label: "NexDrive", href: "https://nexdrive-ev.vercel.app/" },
 ];
 
 export default function Footer() {
