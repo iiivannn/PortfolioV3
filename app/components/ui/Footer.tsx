@@ -27,6 +27,14 @@ const projectLinks = [
 
 export default function Footer() {
   const scrollTo = (href: string) => {
+    if (href === "#home") {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return;
+    }
     const target = document.querySelector(href);
     if (window.__lenis) {
       window.__lenis.scrollTo(href);

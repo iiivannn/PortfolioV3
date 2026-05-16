@@ -98,17 +98,40 @@ export default function Navbar() {
     });
   };
 
+  const scrollToLink = (link: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const lenis = (window as any).__lenis;
+    if (link.toLowerCase() === "home") {
+      if (lenis) {
+        lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return;
+    }
+    const target = document.getElementById(link.toLowerCase());
+    if (target && lenis) {
+      lenis.scrollTo(target);
+    } else if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleNavLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    link: string,
+  ) => {
+    e.preventDefault();
+    scrollToLink(link);
+  };
+
   const handleDrawerLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     link: string,
   ) => {
     e.preventDefault();
     toggleMenu(false);
-    const target = document.getElementById(link.toLowerCase());
-    if (target) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).__lenis?.scrollTo(target);
-    }
+    scrollToLink(link);
   };
 
   return (
@@ -133,6 +156,7 @@ export default function Navbar() {
               key={link}
               href={`#${link.toLowerCase()}`}
               className="navbar-link"
+              onClick={(e) => handleNavLinkClick(e, link)}
             >
               <span className="original">{link}</span>
               <span className="clone">{link}</span>
