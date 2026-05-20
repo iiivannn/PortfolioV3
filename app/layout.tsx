@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     template: "%s | Ivan Abillon",
   },
   description:
-    "Portfolio of Ivan Abillon — frontend developer and web designer based in Cavite, Philippines. Building accessible, intentional web experiences with Next.js, React, and TypeScript.",
+    "Hello, World! I'm Ivan, a frontend developer crafting interfaces where design meets function, one component at a time. I focus on building web experiences that are clean, intuitive, and responsive by design.",
   authors: [{ name: "Ivan Abillon", url: siteUrl }],
   creator: "Ivan Abillon",
   alternates: {
